@@ -8,17 +8,17 @@ import couchdb
 
 
 #our key to twitter API
-consumer_key = 'XsIT8AInFpWzKOxqxxUGIyjUF'
-consumer_secret = 'SqJchyijqas6re8YCGhHDhm9QgAe2DOYPhnQQGF2YLXFc8NNED'
-access_token = '1128155636858904576-Na27CLWShUdxbkRVMmnGgnsiLifdKV'
-access_secret = 'aTsFpIIyFrFX8Tyk2F95KzU1y5KVUM0gVgAO9E3j9Y49w'
+consumer_key = ''
+consumer_secret = ''
+access_token = ''
+access_secret = ''
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth)
 
 db_host = "http://admin:admin@45.113.233.247:5984"
-# db_host = "http://ailinz1:unimelb666@localhost:5984"
+
 couch = couchdb.Server(db_host)
 
 
