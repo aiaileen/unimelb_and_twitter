@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Veterinary and Agricultural Sciences </title>
+        <meta charset="utf-8"/>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+
+        <h1>Veterinary and Agricultural Sciences</h1>
+        <script type="text/javascript" src="scripts/Login.js"></script>
+        <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="scripts/jquery.couch.js"></script>
+    </head>
+
+    <script type="text/javascript">
+        var fvasunimelbResults = []
+            login()
+                // Results_data is a file name.
+                $.couch.db("result").openDoc("fvasunimelb", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        fvasunimelbResults[0] = data["NumTweets19"]
+                        fvasunimelbResults[1] = data["NumTweets18"]
+                        fvasunimelbResults[2] = data["NumTweets17"]
+                        fvasunimelbResults[3] = data["NumTweets16"]
+                        fvasunimelbResults[4] = data["NumTweets15"]
+                        fvasunimelbResults[5] = data["NumLikes"]
+                        fvasunimelbResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("fvasunimelb", {
+                    success: function getInformations(informations) {
+                        fvasunimelbResults[7] = informations["followers"]
+                        fvasunimelbResults[8] = informations["following"]
+                    }
+                })
+        </script>
+
+    <body>
+
+            <div id="main4" style="height:0px"></div>
+            <!-- ECharts单文件引入 -->
+            <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+            <script type="text/javascript">
+                // 路径配置
+                require.config({
+                    paths: {
+                        echarts: 'http://echarts.baidu.com/build/dist'
+                    }
+                });
+                
+                // 使用
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main1')); 
+                        
+                        var option = {
+                            title: {
+                            text: 'Tweets',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+                            tooltip: {
+                                show: true
+                            },
+                            color:["#00C606"],
+                            legend: {
+                                data:['fvasunimelb']
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ["2015","2016","2017","2018","2019"]
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            series : [
+                            {
+                                "name":"Number of Tweets",
+                                "type":"line",
+                                "data":[fvasunimelbResults[4], fvasunimelbResults[3], fvasunimelbResults[2], fvasunimelbResults[1], fvasunimelbResults[0]]
+    
+                            }
+                        ]
+                        };
+                        myChart.setOption(option); 
+                    }
+                );
+            </script>
+        <p>The Twitter accounts relating to Faculty of Faculty of Veterinary and Agricultural Sciences are list as follow: </p>
+        <ul> <!-- changed to list in the tutorial -->
+            <li>fvasunimelb</li>
+        </ul>
+
+        <div class="block">
+                <img src="image/vas.jpg"/>
+                <p>Numberof followers:</p>
+                <ul> <!-- changed to list in the tutorial -->
+                    <li>fvasunimelb: <script>document.write(fvasunimelbResults[7])</script></li>
+        
+                </ul>
+        
+                <p>Numberof followings:</p>
+                <ul> <!-- changed to list in the tutorial -->
+                    <li>fvasunimelb: <script>document.write(fvasunimelbResults[8])</script></li>
+                </ul>
+            </div>
+
+        <div id="main1" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+            
+            // 使用
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main1')); 
+                    
+                    var option = {
+                        title: {
+                            text: 'Tweets',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                        },
+                        
+                        tooltip: {
+                            show: true
+                        },
+                        color:["#00C606"],
+                        legend: {
+                            data:['Number of Tweets']
+                        },
+                        xAxis : [
+                            {
+                                type : 'category',
+                                data : ["2015","2016","2017","2018","2019"]
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value'
+                            }
+                        ],
+                        series : [
+                            {
+                                "name":"Number of Tweets",
+                                "type":"line",
+                                "data":[fvasunimelbResults[4], fvasunimelbResults[3], fvasunimelbResults[2], fvasunimelbResults[1], fvasunimelbResults[0]]
+    
+                            }
+                        ]
+                    };
+                    myChart.setOption(option); 
+                }
+            );
+        </script>
+    
+    <div id="main2" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+    
+        require(
+                [
+                    'echarts',
+                    'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main2')); 
+                    
+                    option = {
+                        title: {
+                            text: 'Posts being liked',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        color:['#2AE5E2', "#DC20E5"],
+        legend: {
+            orient: 'vertical',
+            x: 'right',
+            data:['Likes', 'Nothing']
+        },
+        series: [
+            {
+                name:'Rate of Likes',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[
+                    {value:fvasunimelbResults[5], name:'Likes'},
+                    {value:fvasunimelbResults[0]+fvasunimelbResults[1]+fvasunimelbResults[2]+fvasunimelbResults[3]+fvasunimelbResults[4]-fvasunimelbResults[5], name:'Nothing'}
+                ]
+            }
+        ]
+    };
+                    myChart.setOption(option); 
+                }
+            );
+    </script>
+    
+    <div id="main3" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+    
+        require(
+                [
+                    'echarts',
+                    'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main3')); 
+                    
+                    option = {
+                        title: {
+                            text: 'Posts being retweeted',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'right',
+            data:['Retweets', 'Nothing']
+        },
+        series: [
+            {
+                name:'Rate of Retweets',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[
+                    {value:fvasunimelbResults[6], name:'Retweets'},
+                    {value:fvasunimelbResults[0]+fvasunimelbResults[1]+fvasunimelbResults[2]+fvasunimelbResults[3]+fvasunimelbResults[4]-fvasunimelbResults[6], name:'Nothing'}
+                ]
+            }
+        ]
+    };
+                    myChart.setOption(option); 
+                }
+            );
+    </script>
+
+        <select onchange="window.location.href=this.value;">
+            <option value='VAS.html'>Veterinary and Agricultural Sciences</option>
+            <option value='FAM.html'>Fine Arts and Music</option>
+            <option value='Arts.html'>Arts</option>
+            <option value='ABP.html'>Architecture, Building and Planning</option>
+            <option value='BE.html'>Business and Economics</option>
+            <option value='Education.html'>Education</option>
+            <option value='Engineering.html'>Engineering</option>
+            <option value='Law.html'>Law</option>
+            <option value='MDHS.html'>Medical, Dentistry and Health Sciences</option>
+            <option value='Science.html'>Science</option>
+        </select>
+
+
+    </body>
+</html>

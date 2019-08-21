@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Arts </title>
+        <meta charset="utf-8"/>
+
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+
+        <h1>Arts</h1>
+
+        <script type="text/javascript" src="scripts/Login.js"></script>
+        <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="scripts/jquery.couch.js"></script>
+
+        <script>
+            var artsunimelbResults = []
+            var mssimelbResults = []
+            login()
+                // result_data is a file name.
+                $.couch.db("result").openDoc("artsunimelb", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        artsunimelbResults[0] = data["NumTweets19"]
+                        artsunimelbResults[1] = data["NumTweets18"]
+                        artsunimelbResults[2] = data["NumTweets17"]
+                        artsunimelbResults[3] = data["NumTweets16"]
+                        artsunimelbResults[4] = data["NumTweets15"]
+                        artsunimelbResults[5] = data["NumLikes"]
+                        artsunimelbResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+
+                $.couch.db("result").openDoc("mssimelb", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        mssimelbResults[0] = data["NumTweets19"]
+                        mssimelbResults[1] = data["NumTweets18"]
+                        mssimelbResults[2] = data["NumTweets17"]
+                        mssimelbResults[3] = data["NumTweets16"]
+                        mssimelbResults[4] = data["NumTweets15"]
+                        mssimelbResults[5] = data["NumLikes"]
+                        mssimelbResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+
+                $.couch.db("informations").openDoc("artsunimelb", {
+                    success: function getInformations(informations) {
+                        artsunimelbResults[7] = informations["followers"]
+                        artsunimelbResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("informations").openDoc("mssimelb", {
+                    success: function getInformations(informations) {
+                        mssimelbResults[7] = informations["followers"]
+                        mssimelbResults[8] = informations["following"]
+                    }
+                })
+        </script>
+    </head>
+
+    <body>
+
+            <div id="main4" style="height:0px"></div>
+            <!-- ECharts单文件引入 -->
+            <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+            <script type="text/javascript">
+                // 路径配置
+                require.config({
+                    paths: {
+                        echarts: 'http://echarts.baidu.com/build/dist'
+                    }
+                });
+                
+                // 使用
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main1')); 
+                        
+                        var option = {
+                            title: {
+                            text: 'Tweets',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+                            tooltip: {
+                                show: true
+                            },
+                            legend: {
+                                data:['ArtsUnimelb','mssimelb']
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ["2015","2016","2017","2018","2019"]
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            series: [
+                            {
+                                name:'ArtsUnimelb',
+                                type:'line',
+                                stack: '总量',
+                                data:[artsunimelbResults[4], artsunimelbResults[3], artsunimelbResults[2], artsunimelbResults[1], artsunimelbResults[0]]
+                            },
+                            {
+                                name:'mssimelb',
+                                type:'line',
+                                stack: '总量',
+                                data:[mssimelbResults[4], mssimelbResults[3], mssimelbResults[2], mssimelbResults[1], mssimelbResults[0]]
+                            }
+                        ]
+                        };
+                        myChart.setOption(option); 
+                    }
+                );
+            </script>
+
+        <p>The Twitter accounts relating to Faculty of Arts are list as follow: </p>
+        <ul> <!-- changed to list in the tutorial -->
+            <li>ArtsUnimelb</li>
+            <li>mssimelb</li>
+        </ul>
+        
+        <div class="block">
+                <img src="image/arts.jpg"/>
+            <!-- followers and followings 得从另一个数据库里读 -->
+        <p>Numberof followers:</p>
+        <ul> <!-- changed to list in the tutorial -->
+            <li>ArtsUnimelb: <script>document.write(artsunimelbResults[7])</script></li>
+            <li>mssimelb: <script>document.write(mssimelbResults[7])</script></li>
+        </ul>
+
+        <p>Numberof followings:</p>
+        <ul> <!-- changed to list in the tutorial -->
+              <li>ArtsUnimelb: <script>document.write(artsunimelbResults[8])</script></li>
+              <li>mssimelb: <script>document.write(mssimelbResults[8])</script></li>
+        </ul>
+            </div>
+        
+        <!-- followers and followings 得从另一个数据库里读 -->
+        <p>Numberof followers:</p>
+        <ul> <!-- changed to list in the tutorial -->
+            <li>ArtsUnimelb: <script>document.write(artsunimelbResults[7])</script></li>
+            <li>mssimelb: <script>document.write(mssimelbResults[7])</script></li>
+        </ul>
+
+        <p>Numberof followings:</p>
+        <ul> <!-- changed to list in the tutorial -->
+              <li>ArtsUnimelb: <script>document.write(artsunimelbResults[8])</script></li>
+              <li>mssimelb: <script>document.write(mssimelbResults[8])</script></li>
+        </ul>
+
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="main1" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+            
+            // 使用
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main1')); 
+                    
+                    var option = {
+                        title: {
+                        text: 'Tweets',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data:['ArtsUnimelb','mssimelb']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: ['2015','2016','2017','2018','2019']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [
+                            {
+                                name:'ArtsUnimelb',
+                                type:'line',
+                                stack: '总量',
+                                data:[artsunimelbResults[4], artsunimelbResults[3], artsunimelbResults[2], artsunimelbResults[1], artsunimelbResults[0]]
+                            },
+                            {
+                                name:'mssimelb',
+                                type:'line',
+                                stack: '总量',
+                                data:[mssimelbResults[4], mssimelbResults[3], mssimelbResults[2], mssimelbResults[1], mssimelbResults[0]]
+                            }
+                        ]
+                    };
+                    myChart.setOption(option); 
+                }
+            );
+        </script>
+
+<div id="main2" style="height:400px"></div>
+<!-- ECharts单文件引入 -->
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+    require(
+            [
+                'echarts',
+                'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main2')); 
+                
+                option = {
+                    title: {
+                        text: 'Posts being liked',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    color:['#2AE5E2', "#DC20E5"],
+    legend: {
+        orient: 'vertical',
+        x: 'right',
+        data:['Likes', 'Nothing']
+    },
+    series: [
+        {
+            name:'Rate of Likes',
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:artsunimelbResults[5]+mssimelbResults[5], name:'Likes'},
+                {value:artsunimelbResults[0]+mssimelbResults[0]+artsunimelbResults[1]+mssimelbResults[1]+artsunimelbResults[2]+mssimelbResults[2]+artsunimelbResults[3]+mssimelbResults[3]+artsunimelbResults[4]+mssimelbResults[4]-artsunimelbResults[5]-mssimelbResults[5], name:'Nothing'}
+                ]
+        }
+    ]
+};
+                myChart.setOption(option); 
+            }
+        );
+</script>
+
+<div id="main3" style="height:400px"></div>
+<!-- ECharts单文件引入 -->
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+    require(
+            [
+                'echarts',
+                'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main3')); 
+                
+                option = {
+                    title: {
+                        text: 'Posts being retweeted',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'right',
+                        data:['Retweets', 'Nothing']
+                    },
+                    series: [
+                        {
+                            name:'Rate of Retweets',
+                            type:'pie',
+                            radius: ['50%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data:[
+                                {value:artsunimelbResults[6]+mssimelbResults[6], name:'Likes'},
+                                {value:artsunimelbResults[0]+mssimelbResults[0]+artsunimelbResults[1]+mssimelbResults[1]+artsunimelbResults[2]+mssimelbResults[2]+artsunimelbResults[3]+mssimelbResults[3]+artsunimelbResults[4]+mssimelbResults[4]-artsunimelbResults[6]-mssimelbResults[6], name:'Nothing'}
+                                ]
+                        }
+                    ]
+                };
+                                myChart.setOption(option); 
+                            }
+                        );
+    </script>
+
+        <select onchange="window.location.href=this.value;">
+            <option value='Arts.html'>Arts</option>
+            <option value='ABP.html'>Architecture, Building and Planning</option>
+            <option value='BE.html'>Business and Economics</option>
+            <option value='Education.html'>Education</option>
+            <option value='Engineering.html'>Engineering</option>
+            <option value='FAM.html'>Fine Arts and Music</option>
+            <option value='Law.html'>Law</option>
+            <option value='MDHS.html'>Medical, Dentistry and Health Sciences</option>
+            <option value='Science.html'>Science</option>
+            <option value='VAS.html'>Veterinary and Agricultural Sciences</option>
+        </select>
+
+        
+    </body>
+</html>

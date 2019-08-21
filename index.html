@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <title> Architecture, Building and Planning </title>
+        <meta charset="utf-8"/>
+        <meta charset="utf-8"/>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+
+        <h1>Architecture, Building and Planning</h1>
+        <script type="text/javascript" src="scripts/Login.js"></script>
+        <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="scripts/jquery.couch.js"></script>
+        <script type='text/javascript' src='http://code.jquery.com/jquery-1.11.0.min.js'></script>
+
+    </head>
+
+    <script type="text/javascript">
+        var msdsocialResults = [];
+        var data = {{ result_data | safe }};
+        msdsocialResults[0] = data["NumTweets19"]
+        msdsocialResults[1] = data["NumTweets18"]
+        msdsocialResults[2] = data["NumTweets17"]
+        msdsocialResults[3] = data["NumTweets16"]
+        msdsocialResults[4] = data["NumTweets15"]
+        msdsocialResults[5] = data["NumLikes"]
+        msdsocialResults[6] = data["NumRetwe"]
+              
+    </script>
+    <body>
+
+         
+            <p>The Twitter accounts relating to Melbourne School of Design are list as follow: </p>
+            <ul> <!-- changed to list in the tutorial -->
+                <li>msdsocial</li>
+              </ul>
+            <p>Numberof followers:</p>
+            <ul> <!-- changed to list in the tutorial -->
+                <li>msdsocial: <script>document.write(msdsocialResults[7])</script></li>
+            </ul>
+    
+            <p>Numberof followings:</p>
+            <ul> <!-- changed to list in the tutorial -->
+                  <li>msdsocial: <script>document.write(msdsocialResults[8])</script></li>
+    
+            </ul>
+    
+            <div id="main1" style="height:400px"></div>
+            <!-- ECharts单文件引入 -->
+            <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+            <script type="text/javascript">
+                // 路径配置
+                require.config({
+                    paths: {
+                        echarts: 'http://echarts.baidu.com/build/dist'
+                    }
+                });
+                
+                // 使用
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main1')); 
+                        
+                        var option = {
+                            title: {
+                            text: 'Tweets',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+                            tooltip: {
+                                show: true
+                            },
+                            color:["#00C606"],
+                            legend: {
+                                data:['msdsocial']
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ["2015","2016","2017","2018","2019"]
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            series : [
+                                {
+                                    "name":"msdsocial",
+                                    "type":"line",
+                                    "data":[msdsocialResults[4], msdsocialResults[3], msdsocialResults[2], msdsocialResults[1], msdsocialResults[0]]
+        
+                                }
+                            ]
+                        };
+                        myChart.setOption(option); 
+                    }
+                );
+            </script>
+        
+        <div id="main2" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+        
+            require(
+                    [
+                        'echarts',
+                        'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main2')); 
+                        
+                        option = {
+                            title: {
+                            text: 'Posts being liked',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            color:['#2AE5E2', "#DC20E5"],
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                data:['Likes', 'Nothing']
+            },
+            series: [
+                {
+                    name:'Rate of Likes',
+                    type:'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:msdsocialResults[5], name:'Likes'},
+                        {value:msdsocialResults[0]+msdsocialResults[1]+msdsocialResults[2]+msdsocialResults[3]+msdsocialResults[4]-msdsocialResults[5], name:'Nothing'}
+                    ]
+                }
+            ]
+        };
+                        myChart.setOption(option); 
+                    }
+                );
+        </script>
+        
+        <div id="main3" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+        
+            require(
+                    [
+                        'echarts',
+                        'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main3')); 
+                        
+                        option = {
+                            title: {
+                            text: 'Posts being retweeted',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b}: {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x: 'right',
+                                data:['Retweets', 'Nothing']
+                            },
+                            series: [
+                                {
+                                    name:'Rate of Retweets',
+                                    type:'pie',
+                                    radius: ['50%', '70%'],
+                                    avoidLabelOverlap: false,
+                                    label: {
+                                        normal: {
+                                            show: false,
+                                            position: 'center'
+                                        },
+                                        emphasis: {
+                                            show: true,
+                                            textStyle: {
+                                                fontSize: '30',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    labelLine: {
+                                        normal: {
+                                            show: false
+                                        }
+                                    },
+                                    data:[
+                                        {value:msdsocialResults[6], name:'Retweets'},
+                                        {value:msdsocialResults[0]+msdsocialResults[1]+msdsocialResults[2]+msdsocialResults[3]+msdsocialResults[4]-msdsocialResults[6], name:'Nothing'}
+                                    ]
+                                }
+                            ]
+                        };
+                                        myChart.setOption(option); 
+                                    }
+                                );
+        </script>
+    
+            <select onchange="window.location.href=this.value;">
+                <option value='ABP.html'>Architecture, Building and Planning</option>
+                <option value='Arts.html'>Arts</option
+                ><option value='BE.html'>Business and Economics</option>
+                <option value='Education.html'>Education</option>
+                <option value='Engineering.html'>Engineering</option>
+                <option value='FAM.html'>Fine Arts and Music</option>
+                <option value='Law.html'>Law</option>
+                <option value='MDHS.html'>Medical, Dentistry and Health Sciences</option>
+                <option value='Science.html'>Science</option>
+                <option value='VAS.html'>Veterinary and Agricultural Sciences</option>
+            </select>
+    
+            
+        </body>
+    </html>

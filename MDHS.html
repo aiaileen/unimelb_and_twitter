@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Medicine, Dentistry and Health Science </title>
+        <meta charset="utf-8"/>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+
+        <h1>Medicine, Dentistry and Health Science</h1>
+        <script type="text/javascript" src="scripts/Login.js"></script>
+        <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="scripts/jquery.couch.js"></script>
+    </head>
+
+    <script type="text/javascript">
+        var unimelbmdhsResults = []
+        var unimelbdovsResults = []
+        var unimelbd4hResults = []
+        var chesm_unimelbResults = []
+        var mmw_initiativeResults = []
+        var ultrasoundeduResults = []
+        var umccrResults = []
+        var critcareunimelbResults = []
+        var mrsp_unimelbResults = []
+        var sexhealthuomResults = []
+        var heu_unimelbResults = []
+        var hlthequitymdhsResults = []
+        var cimhResults = []
+        var psychunimelbResults = []
+        var unimelbbmeResults = []
+        var stemcellsuomResults = []
+            login()
+                // result_data is a file name.
+                $.couch.db("result").openDoc("unimelbmdhs", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        unimelbmdhsResults[0] = data["NumTweets19"]
+                        unimelbmdhsResults[1] = data["NumTweets18"]
+                        unimelbmdhsResults[2] = data["NumTweets17"]
+                        unimelbmdhsResults[3] = data["NumTweets16"]
+                        unimelbmdhsResults[4] = data["NumTweets15"]
+                        unimelbmdhsResults[5] = data["NumLikes"]
+                        unimelbmdhsResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("unimelbmdhs", {
+                    success: function getInformations(informations) {
+                        unimelbmdhsResults[7] = informations["followers"]
+                        unimelbmdhsResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("unimelbdovs", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        unimelbdovsResults[0] = data["NumTweets19"]
+                        unimelbdovsResults[1] = data["NumTweets18"]
+                        unimelbdovsResults[2] = data["NumTweets17"]
+                        unimelbdovsResults[3] = data["NumTweets16"]
+                        unimelbdovsResults[4] = data["NumTweets15"]
+                        unimelbdovsResults[5] = data["NumLikes"]
+                        unimelbdovsResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("unimelbdovs", {
+                    success: function getInformations(informations) {
+                        unimelbdovsResults[7] = informations["followers"]
+                        unimelbdovsResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("unimelbd4h", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        unimelbd4hResults[0] = data["NumTweets19"]
+                        unimelbd4hResults[1] = data["NumTweets18"]
+                        unimelbd4hResults[2] = data["NumTweets17"]
+                        unimelbd4hResults[3] = data["NumTweets16"]
+                        unimelbd4hResults[4] = data["NumTweets15"]
+                        unimelbd4hResults[5] = data["NumLikes"]
+                        unimelbd4hResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("unimelbd4h", {
+                    success: function getInformations(informations) {
+                        unimelbd4hResults[7] = informations["followers"]
+                        unimelbd4hResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("chesm_unimelb", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        chesm_unimelbResults[0] = data["NumTweets19"]
+                        chesm_unimelbResults[1] = data["NumTweets18"]
+                        chesm_unimelbResults[2] = data["NumTweets17"]
+                        chesm_unimelbResults[3] = data["NumTweets16"]
+                        chesm_unimelbResults[4] = data["NumTweets15"]
+                        chesm_unimelbResults[5] = data["NumLikes"]
+                        chesm_unimelbResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("chesm_unimelb", {
+                    success: function getInformations(informations) {
+                        chesm_unimelbResults[7] = informations["followers"]
+                        chesm_unimelbResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("mmw_initiative", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        mmw_initiativeResults[0] = data["NumTweets19"]
+                        mmw_initiativeResults[1] = data["NumTweets18"]
+                        mmw_initiativeResults[2] = data["NumTweets17"]
+                        mmw_initiativeResults[3] = data["NumTweets16"]
+                        mmw_initiativeResults[4] = data["NumTweets15"]
+                        mmw_initiativeResults[5] = data["NumLikes"]
+                        mmw_initiativeResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("mmw_initiative", {
+                    success: function getInformations(informations) {
+                        mmw_initiativeResults[7] = informations["followers"]
+                        mmw_initiativeResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("ultrasoundedu", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        ultrasoundeduResults[0] = data["NumTweets19"]
+                        ultrasoundeduResults[1] = data["NumTweets18"]
+                        ultrasoundeduResults[2] = data["NumTweets17"]
+                        ultrasoundeduResults[3] = data["NumTweets16"]
+                        ultrasoundeduResults[4] = data["NumTweets15"]
+                        ultrasoundeduResults[5] = data["NumLikes"]
+                        ultrasoundeduResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("ultrasoundedu", {
+                    success: function getInformations(informations) {
+                        ultrasoundeduResults[7] = informations["followers"]
+                        ultrasoundeduResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("umccr", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        umccrResults[0] = data["NumTweets19"]
+                        umccrResults[1] = data["NumTweets18"]
+                        umccrResults[2] = data["NumTweets17"]
+                        umccrResults[3] = data["NumTweets16"]
+                        umccrResults[4] = data["NumTweets15"]
+                        umccrResults[5] = data["NumLikes"]
+                        umccrResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("umccr", {
+                    success: function getInformations(informations) {
+                        umccrResults[7] = informations["followers"]
+                        umccrResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("critcareunimelb", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        critcareunimelbResults[0] = data["NumTweets19"]
+                        critcareunimelbResults[1] = data["NumTweets18"]
+                        critcareunimelbResults[2] = data["NumTweets17"]
+                        critcareunimelbResults[3] = data["NumTweets16"]
+                        critcareunimelbResults[4] = data["NumTweets15"]
+                        critcareunimelbResults[5] = data["NumLikes"]
+                        critcareunimelbResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("critcareunimelb", {
+                    success: function getInformations(informations) {
+                        critcareunimelbResults[7] = informations["followers"]
+                        critcareunimelbResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("mrsp_unimelb", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        mrsp_unimelbResults[0] = data["NumTweets19"]
+                        mrsp_unimelbResults[1] = data["NumTweets18"]
+                        mrsp_unimelbResults[2] = data["NumTweets17"]
+                        mrsp_unimelbResults[3] = data["NumTweets16"]
+                        mrsp_unimelbResults[4] = data["NumTweets15"]
+                        mrsp_unimelbResults[5] = data["NumLikes"]
+                        mrsp_unimelbResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("mrsp_unimelb", {
+                    success: function getInformations(informations) {
+                        mrsp_unimelbResults[7] = informations["followers"]
+                        mrsp_unimelbResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("sexhealthuom", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        sexhealthuomResults[0] = data["NumTweets19"]
+                        sexhealthuomResults[1] = data["NumTweets18"]
+                        sexhealthuomResults[2] = data["NumTweets17"]
+                        sexhealthuomResults[3] = data["NumTweets16"]
+                        sexhealthuomResults[4] = data["NumTweets15"]
+                        sexhealthuomResults[5] = data["NumLikes"]
+                        sexhealthuomResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("sexhealthuom", {
+                    success: function getInformations(informations) {
+                        sexhealthuomResults[7] = informations["followers"]
+                        sexhealthuomResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("heu_unimelb", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        heu_unimelbResults[0] = data["NumTweets19"]
+                        heu_unimelbResults[1] = data["NumTweets18"]
+                        heu_unimelbResults[2] = data["NumTweets17"]
+                        heu_unimelbResults[3] = data["NumTweets16"]
+                        heu_unimelbResults[4] = data["NumTweets15"]
+                        heu_unimelbResults[5] = data["NumLikes"]
+                        heu_unimelbResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("heu_unimelb", {
+                    success: function getInformations(informations) {
+                        heu_unimelbResults[7] = informations["followers"]
+                        heu_unimelbResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("hlthequitymdhs", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        hlthequitymdhsResults[0] = data["NumTweets19"]
+                        hlthequitymdhsResults[1] = data["NumTweets18"]
+                        hlthequitymdhsResults[2] = data["NumTweets17"]
+                        hlthequitymdhsResults[3] = data["NumTweets16"]
+                        hlthequitymdhsResults[4] = data["NumTweets15"]
+                        hlthequitymdhsResults[5] = data["NumLikes"]
+                        hlthequitymdhsResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("hlthequitymdhs", {
+                    success: function getInformations(informations) {
+                        hlthequitymdhsResults[7] = informations["followers"]
+                        hlthequitymdhsResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("cimh", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        cimhResults[0] = data["NumTweets19"]
+                        cimhResults[1] = data["NumTweets18"]
+                        cimhResults[2] = data["NumTweets17"]
+                        cimhResults[3] = data["NumTweets16"]
+                        cimhResults[4] = data["NumTweets15"]
+                        cimhResults[5] = data["NumLikes"]
+                        cimhResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("cimh", {
+                    success: function getInformations(informations) {
+                        cimhResults[7] = informations["followers"]
+                        cimhResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("psychunimelb", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        psychunimelbResults[0] = data["NumTweets19"]
+                        psychunimelbResults[1] = data["NumTweets18"]
+                        psychunimelbResults[2] = data["NumTweets17"]
+                        psychunimelbResults[3] = data["NumTweets16"]
+                        psychunimelbResults[4] = data["NumTweets15"]
+                        psychunimelbResults[5] = data["NumLikes"]
+                        psychunimelbResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("psychunimelb", {
+                    success: function getInformations(informations) {
+                        psychunimelbResults[7] = informations["followers"]
+                        psychunimelbResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("unimelbbme", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        unimelbbmeResults[0] = data["NumTweets19"]
+                        unimelbbmeResults[1] = data["NumTweets18"]
+                        unimelbbmeResults[2] = data["NumTweets17"]
+                        unimelbbmeResults[3] = data["NumTweets16"]
+                        unimelbbmeResults[4] = data["NumTweets15"]
+                        unimelbbmeResults[5] = data["NumLikes"]
+                        unimelbbmeResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("unimelbbme", {
+                    success: function getInformations(informations) {
+                        unimelbbmeResults[7] = informations["followers"]
+                        unimelbbmeResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("stemcellsuom", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        stemcellsuomResults[0] = data["NumTweets19"]
+                        stemcellsuomResults[1] = data["NumTweets18"]
+                        stemcellsuomResults[2] = data["NumTweets17"]
+                        stemcellsuomResults[3] = data["NumTweets16"]
+                        stemcellsuomResults[4] = data["NumTweets15"]
+                        stemcellsuomResults[5] = data["NumLikes"]
+                        stemcellsuomResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("stemcellsuom", {
+                    success: function getInformations(informations) {
+                        stemcellsuomResults[7] = informations["followers"]
+                        stemcellsuomResults[8] = informations["following"]
+                    }
+                })
+    </script>
+ 
+    <body>
+
+            <div id="main4" style="height:0px"></div>
+            <!-- ECharts单文件引入 -->
+            <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+            <script type="text/javascript">
+                // 路径配置
+                require.config({
+                    paths: {
+                        echarts: 'http://echarts.baidu.com/build/dist'
+                    }
+                });
+                
+                // 使用
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main1')); 
+                        
+                        var option = {
+                            title: {
+                            text: 'Tweets',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+                            tooltip: {
+                                show: true
+                            },
+                            legend: {
+                                data:['unimelbmdhs', 'unimelbdovs', 'unimelbd4h', 'chesm_unimelb', 'mmw_initiative', 'ultrasoundedu', 'umccr', 'critcareunimelb', 'mrsp_unimelb', 'sexhealthuom', 'heu_unimelb', 'hlthequitymdhs', 'cimh', 'psychunimelb', 'unimelbbme', 'stemcellsuom']
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ["2015","2016","2017","2018","2019"]
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    name:'unimelbmdhs',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[unimelbmdhsResults[4], unimelbmdhsResults[3], unimelbmdhsResults[2], unimelbmdhsResults[1], unimelbmdhsResults[0]]
+                                },
+                                {
+                                    name:'unimelbdovs',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[unimelbdovsResults[4], unimelbdovsResults[3], unimelbdovsResults[2], unimelbdovsResults[1], unimelbdovsResults[0]]
+                                },
+                                {
+                                    name:'unimelbd4h',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[unimelbd4hResults[4], unimelbd4hResults[3], unimelbd4hResults[2], unimelbd4hResults[1], unimelbd4hResults[0]]
+                                },
+                                {
+                                    name:'chesm_unimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[chesm_unimelbResults[4], chesm_unimelbResults[3], chesm_unimelbResults[2], chesm_unimelbResults[1], chesm_unimelbResults[0]]
+                                },
+                                {
+                                    name:'mmw_initiative',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[mmw_initiativeResults[4], mmw_initiativeResults[3], mmw_initiativeResults[2], mmw_initiativeResults[1], mmw_initiativeResults[0]]
+                                },
+                                {
+                                    name:'ultrasoundedu',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[ultrasoundeduResults[4], ultrasoundeduResults[3], ultrasoundeduResults[2], ultrasoundeduResults[1], ultrasoundeduResults[0]]
+                                },
+                                {
+                                    name:'umccr',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[umccrResults[4], umccrResults[3], umccrResults[2], umccrResults[1], umccrResults[0]]
+                                },
+                                {
+                                    name:'critcareunimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[critcareunimelbResults[4], critcareunimelbResults[3], critcareunimelbResults[2], critcareunimelbResults[1], critcareunimelbResults[0]]
+                                },
+                                {
+                                    name:'mrsp_unimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[mrsp_unimelbResults[4], mrsp_unimelbResults[3], mrsp_unimelbResults[2], mrsp_unimelbResults[1], mrsp_unimelbResults[0]]
+                                },
+                                {
+                                    name:'sexhealthuom',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[sexhealthuomResults[4], sexhealthuomResults[3], sexhealthuomResults[2], sexhealthuomResults[1], sexhealthuomResults[0]]
+                                },
+                                {
+                                    name:'heu_unimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[heu_unimelbResults[4], heu_unimelbResults[3], heu_unimelbResults[2], heu_unimelbResults[1], heu_unimelbResults[0]]
+                                },
+                                {
+                                    name:'hlthequitymdhs',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[hlthequitymdhsResults[4], hlthequitymdhsResults[3], hlthequitymdhsResults[2], hlthequitymdhsResults[1], hlthequitymdhsResults[0]]
+                                },
+                                {
+                                    name:'cimh',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[cimhResults[4], cimhResults[3], cimhResults[2], cimhResults[1], cimhResults[0]]
+                                },
+                                {
+                                    name:'psychunimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[psychunimelbResults[4], psychunimelbResults[3], psychunimelbResults[2], psychunimelbResults[1], psychunimelbResults[0]]
+                                },
+                                {
+                                    name:'unimelbbme',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[unimelbbmeResults[4], unimelbbmeResults[3], unimelbbmeResults[2], unimelbbmeResults[1], unimelbbmeResults[0]]
+                                },
+                                {
+                                    name:'stemcellsuom',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[stemcellsuomResults[4], stemcellsuomResults[3], stemcellsuomResults[2], stemcellsuomResults[1], stemcellsuomResults[0]]
+                                }
+                            ]
+                        };
+                        myChart.setOption(option); 
+                    }
+                );
+            </script>
+
+        <p>The Twitter accounts relating to Faculty of Medicine, Dentistry and Health Sciences are list as follow: </p>
+        <ul> <!-- changed to list in the tutorial -->
+            <li>unimelbmdhs </li>
+            <li>unimelbdovs </li>
+            <li>unimelbd4h </li>
+            <li>chesm_unimelb </li>
+            <li>mmw_initiative </li>
+            <li>ultrasoundedu </li>
+            <li>umccr </li>
+            <li>critcareunimelb </li>
+            <li>mrsp_unimelb </li>
+            <li>sexhealthuom </li>
+            <li>heu_unimelb </li>
+            <li>hlthequitymdhs </li>
+            <li>cimh </li>
+            <li>psychunimelb </li>
+            <li>unimelbbme</li>
+            <li>stemcellsuom</li>
+          </ul>
+
+          <div class="block">
+                <img src="image/mdhs.jpg"/>
+                <ul> <!-- changed to list in the tutorial -->
+                    <li>unimelbmdhs: <script>document.write(unimelbmdhsResults[7])</script></li>
+                    <li>unimelbdovs: <script>document.write(unimelbdovsResults[7])</script></li>
+                    <li>unimelbd4h: <script>document.write(unimelbd4hResults[7])</script></li>
+                    <li>chesm_unimelb: <script>document.write(chesm_unimelbResults[7])</script></li>
+                    <li>mmw_initiative: <script>document.write(mmw_initiativeResults[7])</script></li>
+                    <li>ultrasoundedu: <script>document.write(ultrasoundeduResults[7])</script></li>
+                    <li>umccr: <script>document.write(umccrResults[7])</script></li>
+                    <li>critcareunimelb: <script>document.write(critcareunimelbResults[7])</script></li>
+                    <li>mrsp_unimelb: <script>document.write(mrsp_unimelbResults[7])</script></li>
+                    <li>sexhealthuom: <script>document.write(sexhealthuomResults[7])</script></li>
+                    <li>heu_unimelb: <script>document.write(heu_unimelbResults[7])</script></li>
+                    <li>hlthequitymdhs: <script>document.write(hlthequitymdhsResults[7])</script></li>
+                    <li>cimh: <script>document.write(cimhResults[7])</script></li>
+                    <li>psychunimelb: <script>document.write(psychunimelbResults[7])</script></li>
+                    <li>unimelbbme: <script>document.write(unimelbbmeResults[7])</script></li>
+                    <li>stemcellsuom: <script>document.write(stemcellsuomResults[7])</script></li>
+                </ul>
+        
+                <p>Numberof followings:</p>
+                <ul> <!-- changed to list in the tutorial -->
+                    <li>unimelbmdhs: <script>document.write(unimelbmdhsResults[8])</script></li>
+                    <li>unimelbdovs: <script>document.write(unimelbdovsResults[8])</script></li>
+                    <li>unimelbd4h: <script>document.write(unimelbd4hResults[8])</script></li>
+                    <li>chesm_unimelb: <script>document.write(chesm_unimelbResults[8])</script></li>
+                    <li>mmw_initiative: <script>document.write(mmw_initiativeResults[8])</script></li>
+                    <li>ultrasoundedu: <script>document.write(ultrasoundeduResults[8])</script></li>
+                    <li>umccr: <script>document.write(umccrResults[8])</script></li>
+                    <li>critcareunimelb: <script>document.write(critcareunimelbResults[8])</script></li>
+                    <li>mrsp_unimelb: <script>document.write(mrsp_unimelbResults[8])</script></li>
+                    <li>sexhealthuom: <script>document.write(sexhealthuomResults[8])</script></li>
+                    <li>heu_unimelb: <script>document.write(heu_unimelbResults[8])</script></li>
+                    <li>hlthequitymdhs: <script>document.write(hlthequitymdhsResults[8])</script></li>
+                    <li>cimh: <script>document.write(cimhResults[8])</script></li>
+                    <li>psychunimelb: <script>document.write(psychunimelbResults[8])</script></li>
+                    <li>unimelbbme: <script>document.write(unimelbbmeResults[8])</script></li>
+                    <li>stemcellsuom: <script>document.write(stemcellsuomResults[8])</script></li>
+                </ul>
+            </div>
+        <p>Numberof followers:</p>
+        
+
+            <div id="main1" style="height:400px"></div>
+            <!-- ECharts单文件引入 -->
+            <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+            <script type="text/javascript">
+                // 路径配置
+                require.config({
+                    paths: {
+                        echarts: 'http://echarts.baidu.com/build/dist'
+                    }
+                });
+                
+                // 使用
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main1')); 
+                        
+                        var option = {
+                            title: {
+                        text: 'Tweets',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data:['unimelbmdhs', 'unimelbdovs', 'unimelbd4h', 'chesm_unimelb', 'mmw_initiative', 'ultrasoundedu', 'umccr', 'critcareunimelb', 'mrsp_unimelb', 'sexhealthuom', 'heu_unimelb', 'hlthequitymdhs', 'cimh', 'psychunimelb', 'unimelbbme', 'stemcellsuom'],
+                                x: 'right'
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            toolbox: {
+                                feature: {
+                                    saveAsImage: {}
+                                }
+                            },
+                            xAxis: {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: ['2015','2016','2017','2018','2019']
+                            },
+                            yAxis: {
+                                type: 'value'
+                            },
+                            series: [
+                                {
+                                    name:'unimelbmdhs',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[unimelbmdhsResults[4], unimelbmdhsResults[3], unimelbmdhsResults[2], unimelbmdhsResults[1], unimelbmdhsResults[0]]
+                                },
+                                {
+                                    name:'unimelbdovs',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[unimelbdovsResults[4], unimelbdovsResults[3], unimelbdovsResults[2], unimelbdovsResults[1], unimelbdovsResults[0]]
+                                },
+                                {
+                                    name:'unimelbd4h',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[unimelbd4hResults[4], unimelbd4hResults[3], unimelbd4hResults[2], unimelbd4hResults[1], unimelbd4hResults[0]]
+                                },
+                                {
+                                    name:'chesm_unimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[chesm_unimelbResults[4], chesm_unimelbResults[3], chesm_unimelbResults[2], chesm_unimelbResults[1], chesm_unimelbResults[0]]
+                                },
+                                {
+                                    name:'mmw_initiative',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[mmw_initiativeResults[4], mmw_initiativeResults[3], mmw_initiativeResults[2], mmw_initiativeResults[1], mmw_initiativeResults[0]]
+                                },
+                                {
+                                    name:'ultrasoundedu',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[ultrasoundeduResults[4], ultrasoundeduResults[3], ultrasoundeduResults[2], ultrasoundeduResults[1], ultrasoundeduResults[0]]
+                                },
+                                {
+                                    name:'umccr',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[umccrResults[4], umccrResults[3], umccrResults[2], umccrResults[1], umccrResults[0]]
+                                },
+                                {
+                                    name:'critcareunimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[critcareunimelbResults[4], critcareunimelbResults[3], critcareunimelbResults[2], critcareunimelbResults[1], critcareunimelbResults[0]]
+                                },
+                                {
+                                    name:'mrsp_unimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[mrsp_unimelbResults[4], mrsp_unimelbResults[3], mrsp_unimelbResults[2], mrsp_unimelbResults[1], mrsp_unimelbResults[0]]
+                                },
+                                {
+                                    name:'sexhealthuom',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[sexhealthuomResults[4], sexhealthuomResults[3], sexhealthuomResults[2], sexhealthuomResults[1], sexhealthuomResults[0]]
+                                },
+                                {
+                                    name:'heu_unimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[heu_unimelbResults[4], heu_unimelbResults[3], heu_unimelbResults[2], heu_unimelbResults[1], heu_unimelbResults[0]]
+                                },
+                                {
+                                    name:'hlthequitymdhs',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[hlthequitymdhsResults[4], hlthequitymdhsResults[3], hlthequitymdhsResults[2], hlthequitymdhsResults[1], hlthequitymdhsResults[0]]
+                                },
+                                {
+                                    name:'cimh',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[cimhResults[4], cimhResults[3], cimhResults[2], cimhResults[1], cimhResults[0]]
+                                },
+                                {
+                                    name:'psychunimelb',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[psychunimelbResults[4], psychunimelbResults[3], psychunimelbResults[2], psychunimelbResults[1], psychunimelbResults[0]]
+                                },
+                                {
+                                    name:'unimelbbme',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[unimelbbmeResults[4], unimelbbmeResults[3], unimelbbmeResults[2], unimelbbmeResults[1], unimelbbmeResults[0]]
+                                },
+                                {
+                                    name:'stemcellsuom',
+                                    type:'line',
+                                    stack: '总量',
+                                    data:[stemcellsuomResults[4], stemcellsuomResults[3], stemcellsuomResults[2], stemcellsuomResults[1], stemcellsuomResults[0]]
+                                }
+                            ]
+                        };
+                        myChart.setOption(option); 
+                    }
+                );
+            </script>
+
+    <div id="main2" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+
+        require(
+                [
+                    'echarts',
+                    'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main2')); 
+                    
+                    option = {
+                        title: {
+                        text: 'Posts being liked',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        color:['#2AE5E2', "#DC20E5"],
+        legend: {
+            orient: 'vertical',
+            x: 'right',
+            data:['Likes', 'Nothing']
+        },
+        series: [
+            {
+                name:'Rate of Likes',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[
+                    {value:unimelbmdhsResults[5]+unimelbdovsResults[5]+unimelbd4hResults[5]+chesm_unimelbResults[5]
+                        +mmw_initiativeResults[5]+ultrasoundeduResults[5]+umccrResults[5]+critcareunimelbResults[5]
+                        +mrsp_unimelbResults[5]+sexhealthuomResults[5]+heu_unimelbResults[5]+hlthequitymdhsResults[5]
+                        +cimhResults[5]+psychunimelbResults[5]+unimelbbmeResults[5]+stemcellsuomResults[5], name:'Likes'},
+                    {value:unimelbmdhsResults[0]+unimelbdovsResults[0]+unimelbd4hResults[0]+chesm_unimelbResults[0]
+                        +mmw_initiativeResults[0]+ultrasoundeduResults[0]+umccrResults[0]+critcareunimelbResults[0]
+                        +mrsp_unimelbResults[0]+sexhealthuomResults[0]+heu_unimelbResults[0]+hlthequitymdhsResults[0]
+                        +cimhResults[0]+psychunimelbResults[0]+unimelbbmeResults[0]+stemcellsuomResults[0]
+                        +unimelbmdhsResults[1]+unimelbdovsResults[1]+unimelbd4hResults[1]+chesm_unimelbResults[1]
+                        +mmw_initiativeResults[1]+ultrasoundeduResults[1]+umccrResults[1]+critcareunimelbResults[1]
+                        +mrsp_unimelbResults[1]+sexhealthuomResults[1]+heu_unimelbResults[1]+hlthequitymdhsResults[1]
+                        +cimhResults[1]+psychunimelbResults[1]+unimelbbmeResults[1]+stemcellsuomResults[1]
+                        +unimelbmdhsResults[2]+unimelbdovsResults[2]+unimelbd4hResults[2]+chesm_unimelbResults[2]
+                        +mmw_initiativeResults[2]+ultrasoundeduResults[2]+umccrResults[2]+critcareunimelbResults[2]
+                        +mrsp_unimelbResults[2]+sexhealthuomResults[2]+heu_unimelbResults[2]+hlthequitymdhsResults[2]
+                        +cimhResults[2]+psychunimelbResults[2]+unimelbbmeResults[2]+stemcellsuomResults[2]
+                        +unimelbmdhsResults[3]+unimelbdovsResults[3]+unimelbd4hResults[3]+chesm_unimelbResults[3]+
+                        mmw_initiativeResults[3]+ultrasoundeduResults[3]+umccrResults[3]+critcareunimelbResults[3]
+                        +mrsp_unimelbResults[3]+sexhealthuomResults[3]+heu_unimelbResults[3]+hlthequitymdhsResults[3]
+                        +cimhResults[3]+psychunimelbResults[3]+unimelbbmeResults[3]+stemcellsuomResults[3]
+                        +unimelbmdhsResults[4]+unimelbdovsResults[4]+unimelbd4hResults[4]+chesm_unimelbResults[4]
+                        +mmw_initiativeResults[4]+ultrasoundeduResults[4]+umccrResults[4]+critcareunimelbResults[4]
+                        +mrsp_unimelbResults[4]+sexhealthuomResults[4]+heu_unimelbResults[4]+hlthequitymdhsResults[4]
+                        +cimhResults[4]+psychunimelbResults[4]+unimelbbmeResults[4]+stemcellsuomResults[4]
+                        -unimelbmdhsResults[5]+unimelbdovsResults[5]+unimelbd4hResults[5]+chesm_unimelbResults[5]
+                        +mmw_initiativeResults[5]+ultrasoundeduResults[5]+umccrResults[5]+critcareunimelbResults[5]
+                        +mrsp_unimelbResults[5]+sexhealthuomResults[5]+heu_unimelbResults[5]+hlthequitymdhsResults[5]
+                        +cimhResults[5]+psychunimelbResults[5]+unimelbbmeResults[5]+stemcellsuomResults[5], name:'Nothing'}
+                    ]
+            }
+        ]
+    };
+                    myChart.setOption(option); 
+                }
+            );
+    </script>
+
+    <div id="main3" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+
+        require(
+                [
+                    'echarts',
+                    'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main3')); 
+                    
+                    option = {
+                        title: {
+                        text: 'Posts being retweeted',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            x: 'right',
+                            data:['Retweets', 'Nothing']
+                        },
+                        series: [
+                            {
+                                name:'Rate of Retweets',
+                                type:'pie',
+                                radius: ['50%', '70%'],
+                                avoidLabelOverlap: false,
+                                label: {
+                                    normal: {
+                                        show: false,
+                                        position: 'center'
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '30',
+                                            fontWeight: 'bold'
+                                        }
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                data:[
+                                {value:unimelbmdhsResults[6]+unimelbdovsResults[6]+unimelbd4hResults[6]+chesm_unimelbResults[6]
+                                        +mmw_initiativeResults[6]+ultrasoundeduResults[6]+umccrResults[6]+critcareunimelbResults[6]
+                                        +mrsp_unimelbResults[6]+sexhealthuomResults[6]+heu_unimelbResults[6]+hlthequitymdhsResults[6]
+                                        +cimhResults[6]+psychunimelbResults[6]+unimelbbmeResults[6]+stemcellsuomResults[6], name:'Likes'},
+                                    {value:unimelbmdhsResults[0]+unimelbdovsResults[0]+unimelbd4hResults[0]+chesm_unimelbResults[0]
+                                        +mmw_initiativeResults[0]+ultrasoundeduResults[0]+umccrResults[0]+critcareunimelbResults[0]
+                                        +mrsp_unimelbResults[0]+sexhealthuomResults[0]+heu_unimelbResults[0]+hlthequitymdhsResults[0]
+                                        +cimhResults[0]+psychunimelbResults[0]+unimelbbmeResults[0]+stemcellsuomResults[0]
+                                        +unimelbmdhsResults[1]+unimelbdovsResults[1]+unimelbd4hResults[1]+chesm_unimelbResults[1]
+                                        +mmw_initiativeResults[1]+ultrasoundeduResults[1]+umccrResults[1]+critcareunimelbResults[1]
+                                        +mrsp_unimelbResults[1]+sexhealthuomResults[1]+heu_unimelbResults[1]+hlthequitymdhsResults[1]
+                                        +cimhResults[1]+psychunimelbResults[1]+unimelbbmeResults[1]+stemcellsuomResults[1]
+                                        +unimelbmdhsResults[2]+unimelbdovsResults[2]+unimelbd4hResults[2]+chesm_unimelbResults[2]
+                                        +mmw_initiativeResults[2]+ultrasoundeduResults[2]+umccrResults[2]+critcareunimelbResults[2]
+                                        +mrsp_unimelbResults[2]+sexhealthuomResults[2]+heu_unimelbResults[2]+hlthequitymdhsResults[2]
+                                        +cimhResults[2]+psychunimelbResults[2]+unimelbbmeResults[2]+stemcellsuomResults[2]
+                                        +unimelbmdhsResults[3]+unimelbdovsResults[3]+unimelbd4hResults[3]+chesm_unimelbResults[3]+
+                                        mmw_initiativeResults[3]+ultrasoundeduResults[3]+umccrResults[3]+critcareunimelbResults[3]
+                                        +mrsp_unimelbResults[3]+sexhealthuomResults[3]+heu_unimelbResults[3]+hlthequitymdhsResults[3]
+                                        +cimhResults[3]+psychunimelbResults[3]+unimelbbmeResults[3]+stemcellsuomResults[3]
+                                        +unimelbmdhsResults[4]+unimelbdovsResults[4]+unimelbd4hResults[4]+chesm_unimelbResults[4]
+                                        +mmw_initiativeResults[4]+ultrasoundeduResults[4]+umccrResults[4]+critcareunimelbResults[4]
+                                        +mrsp_unimelbResults[4]+sexhealthuomResults[4]+heu_unimelbResults[4]+hlthequitymdhsResults[4]
+                                        +cimhResults[4]+psychunimelbResults[4]+unimelbbmeResults[4]+stemcellsuomResults[4]
+                                        -unimelbmdhsResults[5]+unimelbdovsResults[5]+unimelbd4hResults[5]+chesm_unimelbResults[5]
+                                        +mmw_initiativeResults[5]+ultrasoundeduResults[5]+umccrResults[5]+critcareunimelbResults[5]
+                                        +mrsp_unimelbResults[5]+sexhealthuomResults[5]+heu_unimelbResults[5]+hlthequitymdhsResults[5]
+                                        +cimhResults[5]+psychunimelbResults[5]+unimelbbmeResults[5]+stemcellsuomResults[5], name:'Nothing'}
+                                ]
+                            }
+                        ]
+                    };
+                                    myChart.setOption(option); 
+                                }
+                            );
+    </script>
+
+        <select onchange="window.location.href=this.value;">
+            <option value='ABP.html'>Architecture, Building and Planning</option>
+            <option value='Arts.html'>Arts</option
+            ><option value='BE.html'>Business and Economics</option>
+            <option value='Education.html'>Education</option>
+            <option value='Engineering.html'>Engineering</option>
+            <option value='FAM.html'>Fine Arts and Music</option>
+            <option value='Law.html'>Law</option>
+            <option value='MDHS.html'>Medical, Dentistry and Health Sciences</option>
+            <option value='Science.html'>Science</option>
+            <option value='VAS.html'>Veterinary and Agricultural Sciences</option>
+        </select>
+
+
+    </body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Bussiness and Economics </title>
+        <meta charset="utf-8"/>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+
+        <h1>Bussiness and Economics</h1>
+        <script type="text/javascript" src="scripts/Login.js"></script>
+        <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="scripts/jquery.couch.js"></script>
+    </head>
+
+    <script type="text/javascript">
+        var williams_centreResults = []
+        var buseconewsResults = []
+        var melbbschoolResults = []
+            login()
+                // Results_data is a file name.
+                $.couch.db("result").openDoc("williams_centre", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        williams_centreResults[0] = data["NumTweets19"]
+                        williams_centreResults[1] = data["NumTweets18"]
+                        williams_centreResults[2] = data["NumTweets17"]
+                        williams_centreResults[3] = data["NumTweets16"]
+                        williams_centreResults[4] = data["NumTweets15"]
+                        williams_centreResults[5] = data["NumLikes"]
+                        williams_centreResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("williams_centre", {
+                    success: function getInformations(informations) {
+                        williams_centreResults[7] = informations["followers"]
+                        williams_centreResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("buseconews", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        buseconewsResults[0] = data["NumTweets19"]
+                        buseconewsResults[1] = data["NumTweets18"]
+                        buseconewsResults[2] = data["NumTweets17"]
+                        buseconewsResults[3] = data["NumTweets16"]
+                        buseconewsResults[4] = data["NumTweets15"]
+                        buseconewsResults[5] = data["NumLikes"]
+                        buseconewsResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("buseconews", {
+                    success: function getInformations(informations) {
+                        buseconewsResults[7] = informations["followers"]
+                        buseconewsResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("melbbschool", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        melbbschoolResults[0] = data["NumTweets19"]
+                        melbbschoolResults[1] = data["NumTweets18"]
+                        melbbschoolResults[2] = data["NumTweets17"]
+                        melbbschoolResults[3] = data["NumTweets16"]
+                        melbbschoolResults[4] = data["NumTweets15"]
+                        melbbschoolResults[5] = data["NumLikes"]
+                        melbbschoolResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("melbbschool", {
+                    success: function getInformations(informations) {
+                        melbbschoolResults[7] = informations["followers"]
+                        melbbschoolResults[8] = informations["following"]
+                    }
+                })
+        </script>
+
+    <body>
+
+            <div id="main4" style="height:0px"></div>
+            <!-- ECharts单文件引入 -->
+            <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+            <script type="text/javascript">
+                // 路径配置
+                require.config({
+                    paths: {
+                        echarts: 'http://echarts.baidu.com/build/dist'
+                    }
+                });
+                
+                // 使用
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main1')); 
+                        
+                        var option = {
+                            title: {
+                            text: 'Tweets',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+                            tooltip: {
+                                show: true
+                            },
+                            legend: {
+                                data:['williams_centre','buseconews', 'melbbschool']
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ["2015","2016","2017","2018","2019"]
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            series: [
+                            {
+                                name:'williams_centre',
+                                type:'line',
+                                stack: '总量',
+                                data:[williams_centreResults[4], williams_centreResults[3], williams_centreResults[2], williams_centreResults[1], williams_centreResults[0]]
+                            },
+                            {
+                                name:'buseconews',
+                                type:'line',
+                                stack: '总量',
+                                data:[buseconewsResults[4], buseconewsResults[3], buseconewsResults[2], buseconewsResults[1], buseconewsResults[0]]
+                            },
+                            {
+                                name:'melbbschool',
+                                type:'line',
+                                stack: '总量',
+                                data:[melbbschoolResults[4], melbbschoolResults[3], melbbschoolResults[2], melbbschoolResults[1], melbbschoolResults[0]]
+                            }
+                        ]
+                        };
+                        myChart.setOption(option); 
+                    }
+                );
+            </script>
+
+        <p>The Twitter accounts relating to Faculty of Business and Economics are list as follow: </p>
+        <ul> <!-- changed to list in the tutorial -->
+            <li>williams_centre</li>
+            <li>buseconews</li>
+            <li>melbbschool</li>
+          </ul>
+
+          <div class="block">
+                <img src="image/be.jpg"/>
+                <p>Numberof followers:</p>
+                <ul> <!-- changed to list in the tutorial -->
+                    <li>williams_centre: <script>document.write(williams_centreResults[7])</script></li>
+                    <li>buseconews: <script>document.write(buseconewsResults[7])</script></li>
+                    <li>melbbschool: <script>document.write(melbbschoolResults[7])</script></li>
+                </ul>
+        
+                <p>Numberof followings:</p>
+                <ul> <!-- changed to list in the tutorial -->
+                    <li>williams_centre: <script>document.write(williams_centreResults[8])</script></li>
+                    <li>buseconews: <script>document.write(buseconewsResults[8])</script></li>
+                    <li>melbbschool: <script>document.write(melbbschoolResults[8])</script></li>
+                </ul>
+            </div>
+
+        <div id="main1" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+            
+            // 使用
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main1')); 
+                    
+                    var option = {
+                        title: {
+                        text: 'Tweets',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data:['williams_centre','buseconews', 'melbbschool']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: ['2015','2016','2017','2018','2019']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [
+                            {
+                                name:'williams_centre',
+                                type:'line',
+                                stack: '总量',
+                                data:[williams_centreResults[4], williams_centreResults[3], williams_centreResults[2], williams_centreResults[1], williams_centreResults[0]]
+                            },
+                            {
+                                name:'buseconews',
+                                type:'line',
+                                stack: '总量',
+                                data:[buseconewsResults[4], buseconewsResults[3], buseconewsResults[2], buseconewsResults[1], buseconewsResults[0]]
+                            },
+                            {
+                                name:'melbbschool',
+                                type:'line',
+                                stack: '总量',
+                                data:[melbbschoolResults[4], melbbschoolResults[3], melbbschoolResults[2], melbbschoolResults[1], melbbschoolResults[0]]
+                            }
+                        ]
+                    };
+                    myChart.setOption(option); 
+                }
+            );
+        </script>
+    
+    <div id="main2" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+    
+        require(
+                [
+                    'echarts',
+                    'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main2')); 
+                    
+                    option = {
+                        title: {
+                        text: 'Posts being liked',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        color:['#2AE5E2', "#DC20E5"],
+        legend: {
+            orient: 'vertical',
+            x: 'right',
+            data:['Likes', 'Nothing']
+        },
+        series: [
+            {
+                name:'Rate of Likes',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[
+                    {value:williams_centreResults[5]+buseconewsResults[5]+melbbschoolResults[5], name:'Likes'},
+                    {value:williams_centreResults[0]+buseconewsResults[0]+melbbschoolResults[0]+williams_centreResults[1]
+                    +buseconewsResults[1]+melbbschoolResults[1]+williams_centreResults[2]+buseconewsResults[2]
+                    +melbbschoolResults[2]+williams_centreResults[3]+buseconewsResults[3]+melbbschoolResults[3]
+                    +williams_centreResults[4]+buseconewsResults[4]+melbbschoolResults[4]-williams_centreResults[5]
+                    -buseconewsResults[5]-melbbschoolResults[5], name:'Nothing'}
+                ]
+            }
+        ]
+    };
+                    myChart.setOption(option); 
+                }
+            );
+    </script>
+    
+    <div id="main3" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+    
+        require(
+                [
+                    'echarts',
+                    'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main3')); 
+                    
+                    option = {
+                        title: {
+                        text: 'Posts being retweeted',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'right',
+                        data:['Retweets', 'Nothing']
+                    },
+                    series: [
+                        {
+                            name:'Rate of Retweets',
+                            type:'pie',
+                            radius: ['50%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data:[
+                            {value:williams_centreResults[6]+buseconewsResults[6]+melbbschoolResults[6], name:'Retweets'},
+                                {value:williams_centreResults[0]+buseconewsResults[0]+melbbschoolResults[0]+williams_centreResults[1]
+                                +buseconewsResults[1]+melbbschoolResults[1]+williams_centreResults[2]+buseconewsResults[2]
+                                +melbbschoolResults[2]+williams_centreResults[3]+buseconewsResults[3]+melbbschoolResults[3]
+                                +williams_centreResults[4]+buseconewsResults[4]+melbbschoolResults[4]-williams_centreResults[6]
+                                -buseconewsResults[6]-melbbschoolResults[6], name:'Nothing'}
+                            ]
+                        }
+                    ]
+                };
+                                myChart.setOption(option); 
+                            }
+                        );
+    </script>
+
+        <select onchange="window.location.href=this.value;">
+            <option value='BE.html'>Business and Economics</option>
+            <option value='Engineering.html'>Engineering</option>
+            <option value='Arts.html'>Arts</option>
+            <option value='ABP.html'>Architecture, Building and Planning</option>
+            <option value='Education.html'>Education</option>
+            <option value='FAM.html'>Fine Arts and Music</option>
+            <option value='Law.html'>Law</option>
+            <option value='MDHS.html'>Medical, Dentistry and Health Sciences</option>
+            <option value='Science.html'>Science</option>
+            <option value='VAS.html'>Veterinary and Agricultural Sciences</option>
+        </select>        
+    </body>
+</html>

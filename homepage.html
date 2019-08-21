@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Home Page </title>
+        <meta charset="utf-8"/>
+
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+        <h1>Unimelb and Twitter</h1>
+        <script type="text/javascript" src="scripts/Login.js"></script>
+        <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="scripts/jquery.couch.js"></script>
+    </head>
+
+    <script type="text/javascript">
+        var unimelbResults = []
+            login()
+                // result_data is a file name.
+                $.couch.db("result").openDoc("unimelb", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        unimelbResults[0] = data["NumTweets19"]
+                        unimelbResults[1] = data["NumTweets18"]
+                        unimelbResults[2] = data["NumTweets17"]
+                        unimelbResults[3] = data["NumTweets16"]
+                        unimelbResults[4] = data["NumTweets15"]
+                        unimelbResults[5] = data["NumLikes"]
+                        unimelbResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("unimelb", {
+                    success: function getInformations(informations) {
+                        unimelbResults[7] = informations["followers"]
+                        unimelbResults[8] = informations["following"]
+                    }
+                })
+    </script>
+
+    <body>
+        <p style='color:#000FFF'><b>This project shows the popularity of Unimelb by analysing the data on Twitter.</b></p>
+
+        <p style='color:#000FFF'> Contributors: </p>
+        <li style='color:#000FFF'>Yuhan Bai</li>
+        <li style='color:#000FFF'>Ailin Zhang</li>
+
+        <p style='color:#000FFF'> Supervisor: </p>
+        <li style='color:#000FFF'>Richard Sinnott</li>
+        
+        <img src="image/homepage.jpg" class="ff">
+
+        <p>The following diagram shows the world ranking changes of Unimelb in recent years.</p>
+
+        <div id="main1" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+            
+            // 使用
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main1')); 
+                    
+                    var option = {
+                        title: {
+                        text: 'World Ranking',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                        tooltip: {
+                            show: true
+                        },
+                        color:["#00C606"],
+                        legend: {
+                            data:['unimelb']
+                        },
+                        xAxis : [
+                            {
+                                type : 'category',
+                                data : ["2015","2016","2017","2018","2019"]
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value'
+                            }
+                        ],
+                        series : [
+                            {
+                                "name":"unimelb",
+                                "type":"line",
+                                "data":[33, 42, 42, 41, 39]
+    
+                            }
+                        ]
+                    };
+                    myChart.setOption(option);
+                }
+            );
+        </script>
+
+        <p>The following diagram shows the number of tweets posted by the official account of Unimelb.</p>
+
+        <div id="main2" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+            
+            // 使用
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main2')); 
+                    
+                    var option = {
+                        title: {
+                        text: 'Tweets',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                        tooltip: {
+                            show: true
+                        },
+                        color:["#00C606"],
+                        legend: {
+                            data:['unimelb']
+                        },
+                        xAxis : [
+                            {
+                                type : 'category',
+                                data : ["2015","2016","2017","2018","2019"]
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value'
+                            }
+                        ],
+                        series : [
+                            {
+                                "name":"unimelb",
+                                "type":"line",
+                                "data":[unimelbResults[4], unimelbResults[3], unimelbResults[2], unimelbResults[1], unimelbResults[0]]
+    
+                            }
+                        ]
+                    };
+                    myChart.setOption(option);
+                }
+            );
+        </script>
+
+        <p>The following pie chart shows the rate of posts which receives likes: </p>
+
+        <div id="main3" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+        
+            require(
+                    [
+                        'echarts',
+                        'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main3')); 
+                        
+                        option = {
+                            title: {
+                            text: 'Posts being liked',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b}: {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x: 'right',
+                                data:['Likes', 'Nothing']
+                            },
+                            series: [
+                                {
+                                    name:'Rate of Likes',
+                                    type:'pie',
+                                    radius: ['50%', '70%'],
+                                    avoidLabelOverlap: false,
+                                    label: {
+                                        normal: {
+                                            show: false,
+                                            position: 'center'
+                                        },
+                                        emphasis: {
+                                            show: true,
+                                            textStyle: {
+                                                fontSize: '30',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    labelLine: {
+                                        normal: {
+                                            show: false
+                                        }
+                                    },
+                                    data:[
+                                        {value:unimelbResults[5], name:'Retweets'},
+                                        {value:unimelbResults[0]+unimelbResults[1]+unimelbResults[2]+unimelbResults[3]+unimelbResults[4]-unimelbResults[5], name:'Nothing'}
+                                    ]
+                                }
+                            ]
+                        };
+                                        myChart.setOption(option); 
+                                    }
+                                );
+        </script>
+
+        <p>The following pie chart shows the rate of posts which are retweeted: </p>
+
+        <div id="main4" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+        
+            require(
+                    [
+                        'echarts',
+                        'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main4')); 
+                        
+                        option = {
+                            title: {
+                            text: 'Posts being retweeted',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b}: {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x: 'right',
+                                data:['Retweets', 'Nothing']
+                            },
+                            series: [
+                                {
+                                    name:'Rate of Retweets',
+                                    type:'pie',
+                                    radius: ['50%', '70%'],
+                                    avoidLabelOverlap: false,
+                                    label: {
+                                        normal: {
+                                            show: false,
+                                            position: 'center'
+                                        },
+                                        emphasis: {
+                                            show: true,
+                                            textStyle: {
+                                                fontSize: '30',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    labelLine: {
+                                        normal: {
+                                            show: false
+                                        }
+                                    },
+                                    data:[
+                                        {value:unimelbResults[6], name:'Retweets'},
+                                        {value:unimelbResults[0]+unimelbResults[1]+unimelbResults[2]+unimelbResults[3]+unimelbResults[4]-unimelbResults[6], name:'Nothing'}
+                                    ]
+                                }
+                            ]
+                        };
+                                        myChart.setOption(option); 
+                                    }
+                                );
+        </script>
+
+        <p>For the details of each account belongs to academies, select the buttons below: </p>
+
+        <select onchange="window.location.href=this.value;">
+            <option value=''>Home Page</option>
+            <option value='Arts.html'>Arts</option>
+            <option value='ABP.html'>Architecture, Building and Planning</option>
+            <option value='BE.html'>Business and Economics</option>
+            <option value='Education.html'>Education</option>
+            <option value='Engineering.html'>Engineering</option>
+            <option value='FAM.html'>Fine Arts and Music</option>
+            <option value='Law.html'>Law</option>
+            <option value='MDHS.html'>Medical, Dentistry and Health Sciences</option>
+            <option value='Science.html'>Science</option>
+            <option value='VAS.html'>Veterinary and Agricultural Sciences</option>
+        </select>
+        
+    </body>
+</html>

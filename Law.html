@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Law </title>
+        <meta charset="utf-8"/>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+
+        <h1>Law</h1>
+        <script type="text/javascript" src="scripts/Login.js"></script>
+        <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="scripts/jquery.couch.js"></script>
+    </head>
+
+    <script type="text/javascript">
+        var alc_mlsResults = []
+        var cccsmelbourneResults = []
+        var digcitzmlsResults = []
+        var lprn_mlsResults = []
+        var melblawschoolResults = []
+        var government_uomResults = []
+            login()
+                // result_data is a file name.
+                $.couch.db("result").openDoc("alc_mls", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        alc_mlsResults[0] = data["NumTweets19"]
+                        alc_mlsResults[1] = data["NumTweets18"]
+                        alc_mlsResults[2] = data["NumTweets17"]
+                        alc_mlsResults[3] = data["NumTweets16"]
+                        alc_mlsResults[4] = data["NumTweets15"]
+                        alc_mlsResults[5] = data["NumLikes"]
+                        alc_mlsResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("alc_mls", {
+                    success: function getInformations(informations) {
+                        alc_mlsResults[7] = informations["followers"]
+                        alc_mlsResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("cccsmelbourne", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        cccsmelbourneResults[0] = data["NumTweets19"]
+                        cccsmelbourneResults[1] = data["NumTweets18"]
+                        cccsmelbourneResults[2] = data["NumTweets17"]
+                        cccsmelbourneResults[3] = data["NumTweets16"]
+                        cccsmelbourneResults[4] = data["NumTweets15"]
+                        cccsmelbourneResults[5] = data["NumLikes"]
+                        cccsmelbourneResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("cccsmelbourne", {
+                    success: function getInformations(informations) {
+                        cccsmelbourneResults[7] = informations["followers"]
+                        cccsmelbourneResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("digcitzmls", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        digcitzmlsResults[0] = data["NumTweets19"]
+                        digcitzmlsResults[1] = data["NumTweets18"]
+                        digcitzmlsResults[2] = data["NumTweets17"]
+                        digcitzmlsResults[3] = data["NumTweets16"]
+                        digcitzmlsResults[4] = data["NumTweets15"]
+                        digcitzmlsResults[5] = data["NumLikes"]
+                        digcitzmlsResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("digcitzmls", {
+                    success: function getInformations(informations) {
+                        digcitzmlsResults[7] = informations["followers"]
+                        digcitzmlsResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("lprn_mls", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        lprn_mlsResults[0] = data["NumTweets19"]
+                        lprn_mlsResults[1] = data["NumTweets18"]
+                        lprn_mlsResults[2] = data["NumTweets17"]
+                        lprn_mlsResults[3] = data["NumTweets16"]
+                        lprn_mlsResults[4] = data["NumTweets15"]
+                        lprn_mlsResults[5] = data["NumLikes"]
+                        lprn_mlsResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("lprn_mls", {
+                    success: function getInformations(informations) {
+                        lprn_mlsResults[7] = informations["followers"]
+                        lprn_mlsResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("melblawschool", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        melblawschoolResults[0] = data["NumTweets19"]
+                        melblawschoolResults[1] = data["NumTweets18"]
+                        melblawschoolResults[2] = data["NumTweets17"]
+                        melblawschoolResults[3] = data["NumTweets16"]
+                        melblawschoolResults[4] = data["NumTweets15"]
+                        melblawschoolResults[5] = data["NumLikes"]
+                        melblawschoolResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("melblawschool", {
+                    success: function getInformations(informations) {
+                        melblawschoolResults[7] = informations["followers"]
+                        melblawschoolResults[8] = informations["following"]
+                    }
+                })
+
+                $.couch.db("result").openDoc("government_uom", {
+                // if success, then trigger function (data)
+                    success: function getData(data) {
+                        government_uomResults[0] = data["NumTweets19"]
+                        government_uomResults[1] = data["NumTweets18"]
+                        government_uomResults[2] = data["NumTweets17"]
+                        government_uomResults[3] = data["NumTweets16"]
+                        government_uomResults[4] = data["NumTweets15"]
+                        government_uomResults[5] = data["NumLikes"]
+                        government_uomResults[6] = data["NumRetwe"]
+                    },
+                    error: function (status) {
+                        console.log(status);
+                        alert("Cannot get data from database");
+                    }
+                })
+                $.couch.db("informations").openDoc("government_uom", {
+                    success: function getInformations(informations) {
+                        government_uomResults[7] = informations["followers"]
+                        government_uomResults[8] = informations["following"]
+                    }
+                })
+    </script>
+
+    <body>
+
+            <div id="main4" style="height:0px"></div>
+            <!-- ECharts单文件引入 -->
+            <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+            <script type="text/javascript">
+                // 路径配置
+                require.config({
+                    paths: {
+                        echarts: 'http://echarts.baidu.com/build/dist'
+                    }
+                });
+                
+                // 使用
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('main1')); 
+                        
+                        var option = {
+                            title: {
+                            text: 'Tweets',
+                                textStyle: {
+                                    fontWeight: 'normal',              //标题颜色
+                                    color: '#FF0000'
+                                },
+                        },
+                            tooltip: {
+                                show: true
+                            },
+                            legend: {
+                                data:['alc_mls','cccsmelbourne', 'digcitzmls', 'lprn_mls', 'melblawschool', 'government_uom']
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ["2015","2016","2017","2018","2019"]
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            series: [
+                            {
+                                name:'alc_mls',
+                                type:'line',
+                                stack: '总量',
+                                data:[alc_mlsResults[4], alc_mlsResults[3], alc_mlsResults[2], alc_mlsResults[1], alc_mlsResults[0]]
+                            },
+                            {
+                                name:'cccsmelbourne',
+                                type:'line',
+                                stack: '总量',
+                                data:[cccsmelbourneResults[4], cccsmelbourneResults[3], cccsmelbourneResults[2], cccsmelbourneResults[1], cccsmelbourneResults[0]]
+                            },
+                            {
+                                name:'digcitzmls',
+                                type:'line',
+                                stack: '总量',
+                                data:[digcitzmlsResults[4], digcitzmlsResults[3], digcitzmlsResults[2], digcitzmlsResults[1], digcitzmlsResults[0]]
+                            },
+                            {
+                                name:'lprn_mls',
+                                type:'line',
+                                stack: '总量',
+                                data:[lprn_mlsResults[4], lprn_mlsResults[3], lprn_mlsResults[2], lprn_mlsResults[1], lprn_mlsResults[0]]
+                            },
+                            {
+                                name:'melblawschool',
+                                type:'line',
+                                stack: '总量',
+                                data:[melblawschoolResults[4], melblawschoolResults[3], melblawschoolResults[2], melblawschoolResults[1], melblawschoolResults[0]]
+                            },
+                            {
+                                name:'government_uom',
+                                type:'line',
+                                stack: '总量',
+                                data:[government_uomResults[4], government_uomResults[3], government_uomResults[2], government_uomResults[1], government_uomResults[0]]
+                            }
+                        ]
+                        };
+                        myChart.setOption(option); 
+                    }
+                );
+            </script>
+
+        <p>The Twitter accounts relating to Melbourne Law School are list as follow: </p>
+        <ul> <!-- changed to list in the tutorial -->
+            <li>alc_mls</li>
+            <li>cccsmelbourne</li>
+            <li>digcitzmls</li>
+            <li>lprn_mls</li>
+            <li>melblawschool</li>
+            <li>government_uom</li>
+          </ul>
+
+          <div class="block">
+                <img src="image/law.jpg"/>
+                <p>Numberof followers:</p>
+                <ul> <!-- changed to list in the tutorial -->
+                    <li>alc_mls: <script>document.write(alc_mlsResults[7])</script></li>
+                    <li>cccsmelbourne: <script>document.write(cccsmelbourneResults[7])</script></li>
+                    <li>digcitzmls: <script>document.write(digcitzmlsResults[7])</script></li>
+                    <li>lprn_mls: <script>document.write(lprn_mlsResults[7])</script></li>
+                    <li>melblawschool: <script>document.write(melblawschoolResults[7])</script></li>
+                    <li>government_uom: <script>document.write(government_uomResults[7])</script></li>
+                </ul>
+        
+                <p>Numberof followings:</p>
+                <ul> <!-- changed to list in the tutorial -->
+                      <li>alc_mls: <script>document.write(alc_mlsResults[8])</script></li>
+                      <li>cccsmelbourne: <script>document.write(cccsmelbourneResults[8])</script></li>
+                      <li>digcitzmls: <script>document.write(digcitzmlsResults[8])</script></li>
+                      <li>lprn_mls: <script>document.write(lprn_mlsResults[8])</script></li>
+                      <li>melblawschool: <script>document.write(melblawschoolResults[8])</script></li>
+                      <li>government_uom: <script>document.write(government_uomResults[8])</script></li>
+                </ul>
+            </div>
+        
+        
+
+        <div id="main1" style="height:400px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+            
+            // 使用
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main1')); 
+                    
+                    var option = {
+                        title: {
+                        text: 'Tweets ',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data:['alc_mls','cccsmelbourne', 'digcitzmls', 'lprn_mls', 'melblawschool', 'government_uom']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: ['2015','2016','2017','2018','2019']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [
+                            {
+                                name:'alc_mls',
+                                type:'line',
+                                stack: '总量',
+                                data:[alc_mlsResults[4], alc_mlsResults[3], alc_mlsResults[2], alc_mlsResults[1], alc_mlsResults[0]]
+                            },
+                            {
+                                name:'cccsmelbourne',
+                                type:'line',
+                                stack: '总量',
+                                data:[cccsmelbourneResults[4], cccsmelbourneResults[3], cccsmelbourneResults[2], cccsmelbourneResults[1], cccsmelbourneResults[0]]
+                            },
+                            {
+                                name:'digcitzmls',
+                                type:'line',
+                                stack: '总量',
+                                data:[digcitzmlsResults[4], digcitzmlsResults[3], digcitzmlsResults[2], digcitzmlsResults[1], digcitzmlsResults[0]]
+                            },
+                            {
+                                name:'lprn_mls',
+                                type:'line',
+                                stack: '总量',
+                                data:[lprn_mlsResults[4], lprn_mlsResults[3], lprn_mlsResults[2], lprn_mlsResults[1], lprn_mlsResults[0]]
+                            },
+                            {
+                                name:'melblawschool',
+                                type:'line',
+                                stack: '总量',
+                                data:[melblawschoolResults[4], melblawschoolResults[3], melblawschoolResults[2], melblawschoolResults[1], melblawschoolResults[0]]
+                            },
+                            {
+                                name:'government_uom',
+                                type:'line',
+                                stack: '总量',
+                                data:[government_uomResults[4], government_uomResults[3], government_uomResults[2], government_uomResults[1], government_uomResults[0]]
+                            }
+                        ]
+                    };
+                    myChart.setOption(option); 
+                }
+            );
+        </script>
+
+<div id="main2" style="height:400px"></div>
+<!-- ECharts单文件引入 -->
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+    require(
+            [
+                'echarts',
+                'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main2')); 
+                
+                option = {
+                    title: {
+                        text: 'Posts being liked',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    color:['#2AE5E2', "#DC20E5"],
+    legend: {
+        orient: 'vertical',
+        x: 'right',
+        data:['Likes', 'Nothing']
+    },
+    series: [
+        {
+            name:'Rate of Likes',
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:alc_mlsResults[5]+cccsmelbourneResults[5]+digcitzmlsResults[5]+lprn_mlsResults[5]+melblawschoolResults[5]+government_uomResults[5], name:'Likes'},
+                {value:alc_mlsResults[0]+cccsmelbourneResults[0]+digcitzmlsResults[0]+lprn_mlsResults[0]+melblawschoolResults[0]+government_uomResults[0]
+                +alc_mlsResults[1]+cccsmelbourneResults[1]+digcitzmlsResults[1]+lprn_mlsResults[1]+melblawschoolResults[1]+government_uomResults[1]
+                +alc_mlsResults[2]+cccsmelbourneResults[2]+digcitzmlsResults[2]+lprn_mlsResults[2]+melblawschoolResults[2]+government_uomResults[2]
+                +alc_mlsResults[3]+cccsmelbourneResults[3]+digcitzmlsResults[3]+lprn_mlsResults[3]+melblawschoolResults[3]+government_uomResults[3]
+                +alc_mlsResults[4]+cccsmelbourneResults[4]+digcitzmlsResults[4]+lprn_mlsResults[4]+melblawschoolResults[4]+government_uomResults[4]
+                -alc_mlsResults[5]-cccsmelbourneResults[5]-digcitzmlsResults[5]+lprn_mlsResults[5]+melblawschoolResults[5]+government_uomResults[5], name:'Nothing'}
+                ]
+        }
+    ]
+};
+                myChart.setOption(option); 
+            }
+        );
+</script>
+
+<div id="main3" style="height:400px"></div>
+<!-- ECharts单文件引入 -->
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+    require(
+            [
+                'echarts',
+                'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main3')); 
+                
+                option = {
+                    title: {
+                        text: 'Posts being retweets',
+                            textStyle: {
+                                fontWeight: 'normal',              //标题颜色
+                                color: '#FF0000'
+                            },
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'right',
+                        data:['Retweets', 'Nothing']
+                    },
+                    series: [
+                        {
+                            name:'Rate of Retweets',
+                            type:'pie',
+                            radius: ['50%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data:[
+                            {value:alc_mlsResults[6]+cccsmelbourneResults[6]+digcitzmlsResults[6]+lprn_mlsResults[6]+melblawschoolResults[6]+government_uomResults[6], name:'Likes'},
+                                {value:alc_mlsResults[0]+cccsmelbourneResults[0]+digcitzmlsResults[0]+lprn_mlsResults[0]+melblawschoolResults[0]+government_uomResults[0]
+                                +alc_mlsResults[1]+cccsmelbourneResults[1]+digcitzmlsResults[1]+lprn_mlsResults[1]+melblawschoolResults[1]+government_uomResults[1]
+                                +alc_mlsResults[2]+cccsmelbourneResults[2]+digcitzmlsResults[2]+lprn_mlsResults[2]+melblawschoolResults[2]+government_uomResults[2]
+                                +alc_mlsResults[3]+cccsmelbourneResults[3]+digcitzmlsResults[3]+lprn_mlsResults[3]+melblawschoolResults[3]+government_uomResults[3]
+                                +alc_mlsResults[4]+cccsmelbourneResults[4]+digcitzmlsResults[4]+lprn_mlsResults[4]+melblawschoolResults[4]+government_uomResults[4]
+                                -alc_mlsResults[6]-cccsmelbourneResults[6]-digcitzmlsResults[6]+lprn_mlsResults[6]+melblawschoolResults[6]+government_uomResults[6], name:'Nothing'}
+                                ]
+                        }
+                    ]
+                };
+                                myChart.setOption(option); 
+                            }
+                        );
+    </script>
+
+        <select onchange="window.location.href=this.value;">
+            <option value='Law.html'>Law</option>
+            <option value='Arts.html'>Arts</option>
+            <option value='ABP.html'>Architecture, Building and Planning</option>
+            <option value='BE.html'>Business and Economics</option>
+            <option value='Education.html'>Education</option>
+            <option value='Engineering.html'>Engineering</option>
+            <option value='FAM.html'>Fine Arts and Music</option>
+            <option value='MDHS.html'>Medical, Dentistry and Health Sciences</option>
+            <option value='Science.html'>Science</option>
+            <option value='VAS.html'>Veterinary and Agricultural Sciences</option>
+        </select>
+
+        
+    </body>
+</html>
