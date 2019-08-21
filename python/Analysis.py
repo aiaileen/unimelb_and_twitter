@@ -9,8 +9,7 @@ from _datetime import datetime
 
 
 def getDB(database):
-    db_host = "http://ailinz1:unimelb666@localhost:5984"
-    # db_host = "http://admin:admin@45.113.233.247:5984"
+    db_host = "http://admin:admin@45.113.233.247:5984"
     couch = couchdb.Server(db_host)
     db = couch[database]
     return db
